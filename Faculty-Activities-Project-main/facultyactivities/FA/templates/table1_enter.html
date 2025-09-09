@@ -11,189 +11,111 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-image: url('https://images.shiksha.com/mediadata/images/1602131725phpLQmAQp.jpeg');
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding-top: 72px;
         }
 
-        .container {
-            max-width: 2500px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 12px 24px; }
 
         /* Content box styles */
-        .content-box {
-            border-radius: 20px;
-            padding: 40px;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-        }
+        .content-box { border-radius: 16px; padding: 24px; background-color: rgba(255,255,255,.94); backdrop-filter: saturate(160%) blur(6px); box-shadow: 0 10px 30px rgba(0,0,0,.15); }
 
         /* Header styles */
-        h1 {
-            text-align: center;
-            color: #34495e;
-            margin-bottom: 40px;
-            font-size: 40px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+        h1 { color:#294c66; font-size:32px; margin:0; letter-spacing:.5px; }
 
         /* Paragraph styles */
-        p {
-            text-align: center;
-            color: #34495e;
-            margin-bottom: 40px;
-            font-size: 20px;
-        }
+        p { text-align: center; color:#34495e; margin-bottom:40px; font-size:20px; }
 
-        /* Button container styles */
-        .btn-container {
-            display: flex;
-            justify-content: center;
-        }
+        /* Buttons */
+        .btn-brand { padding:12px 20px; border:none; border-radius:12px; background:#2ecc71; color:#fff; font-size:16px; box-shadow:0 6px 14px rgba(46,204,113,.35); transition:transform .15s ease; }
+        .btn-brand:hover { transform: translateY(-1px); }
+        .btn-outline { border:2px solid #294c66; color:#294c66; background:transparent; border-radius:10px; padding:8px 14px; }
+        .btn-outline:hover { background:#294c66; color:#fff; }
 
-        /* Button styles */
-        .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 25px;
-            background-color: #2ecc71;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-            margin: 0 10px;
-            font-size: 18px;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+        .btn i { margin-right:10px; }
+        .btn:hover { background-color:#27ae60; }
 
-        .btn i {
-            margin-right: 10px;
-        }
+        /* Filter bar */
+        .filter-bar { display:flex; gap:12px; align-items:center; margin:16px 0; }
+        .filter-input { flex:1; border:1px solid #dfe6ee; border-radius:10px; padding:10px 12px; }
 
-        .btn:hover {
-            background-color: #27ae60;
-        }
-
-        /* Form container styles */
-        .filter-form {
-            margin-bottom: 20px;
-        }
-
-        /* Table container styles */
-        .table-container {
-            max-height: 400px;
-            overflow-y: auto;
-        }
+        /* Table container */
+        .table-container { max-height: calc(70vh); overflow: auto; border-radius: 12px; }
 
         /* Table styles */
-        table {
-            width: 100%;
-            background-color: #fff;
-        }
+        table { width:100%; background:#fff; border-collapse:separate; border-spacing:0; }
+        th, td { padding:12px; text-align:left; border-bottom:1px solid #e9edf3; vertical-align:middle; }
+        th { position:sticky; top:0; background:#f7f9fc; font-weight:700; color:#334e68; text-transform:uppercase; font-size:12px; z-index:1; }
+        tr:nth-child(even) { background-color:#fafbfe; }
+        tr:hover { background-color:#f2f2f2; }
 
-        th,
-        td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-            vertical-align: middle;
-        }
-
-        th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-            color: #333;
-            text-transform: uppercase;
-            font-size: 14px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        tr:hover {
-            background-color: #f2f2f2;
-        }
-
-        /* Additional styles for the name input field */
-        .form-control {
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        /* Go back link styles */
-        .back-link {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 24px;
-            color: #34495e;
-            text-decoration: none;
-            padding: 10px;
-            border: 2px solid #34495e;
-            border-radius: 10px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .back-link:hover {
-            background-color: #34495e;
-            color: #fff;
-        }
+        /* Action bar */
+        .action-bar { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; }
     </style>
 </head>
 
 <body>
+    
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="content-box">
-                    <a href="goback_facdash" class="back-link">Go back</a>
-                    <h1>SDP Organised</h1>
-                    <p>Explore various activities and roles within the faculty community.</p>
+        <div class="content-box">
+            <div class="action-bar">
+                <a href="goback_facdash" class="btn-outline">← Go back</a>
+                <h1>SDP Organised</h1>
+                <a href="detail1_enter" class="btn-brand"><i class="fas fa-plus-circle"></i> New Entry</a>
+            </div>
+            <p>Explore various activities and roles within the faculty community.</p>
 
-                    <div class="btn-container">
-                        <a href="detail1_enter" class="btn btn-success" onclick="newEntry()">
-                            <i class="fas fa-plus-circle"></i> New Entry
-                        </a>
-                    </div>
+            <!-- Search Filter -->
+            <div class="filter-bar">
+                <input id="tableSearch" type="text" class="filter-input" placeholder="Search any field...">
+            </div>
 
-                    <div class="table-container">
-                        <table class="table table-bordered" id="attendanceTable">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Name of Coordinators</th>
-                                    <th>Type of Event</th>
-                                    <th>Name of Event</th>
-                                    <th>Duration</th>
-                                    <th>Number of Participants</th>
-                                    <th>Resource Persons</th>
-                                    <th>Name of Sponsors</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for obj in sdp_organised %}
-                                <tr>
-                                    <td>{{ obj.name_coord }}</td>
-                                    <td>{{ obj.type_of_event }}</td>
-                                    <td>{{ obj.name_of_event }}</td>
-                                    <td>{{ obj.duration }}</td>
-                                    <td>{{ obj.no_of_participants }}</td>
-                                    <td>{{ obj.resource_persons }}</td>
-                                    <td>{{ obj.sponsors }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            <!-- Table -->
+            <div class="table-container">
+                <table class="table table-bordered" id="attendanceTable">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Name of Coordinators</th>
+                            <th>Type of Event</th>
+                            <th>Name of Event</th>
+                            <th>Duration</th>
+                            <th>Number of Participants</th>
+                            <th>Resource Persons</th>
+                            <th>Name of Sponsors</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for obj in sdp_organised %}
+                        <tr>
+                            <td>{{ obj.name_coord }}</td>
+                            <td>{{ obj.type_of_event }}</td>
+                            <td>{{ obj.name_of_event }}</td>
+                            <td>{{ obj.duration }}</td>
+                            <td>{{ obj.no_of_participants }}</td>
+                            <td>{{ obj.resource_persons }}</td>
+                            <td>{{ obj.sponsors }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-</body>
 
+    <!-- Live search script -->
+    <script>
+        (function(){
+            var input = document.getElementById('tableSearch');
+            if (!input) return;
+            input.addEventListener('input', function(){
+                var filter = this.value.toLowerCase();
+                var rows = document.querySelectorAll('#attendanceTable tbody tr');
+                rows.forEach(function(row){
+                    row.style.display = row.innerText.toLowerCase().includes(filter) ? '' : 'none';
+                });
+            });
+        })();
+    </script>
+</body>
 </html>

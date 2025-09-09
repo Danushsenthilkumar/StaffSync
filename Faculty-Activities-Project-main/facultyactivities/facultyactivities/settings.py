@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'facultyactivities.middleware.no_cache.NoCacheForAuthPages',
 ]
 
 ROOT_URLCONF = 'facultyactivities.urls'
@@ -86,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Digitisation',
         'USER': 'root',
-        'PASSWORD': 'Danush@#77',
+        'PASSWORD': '1405',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -132,3 +133,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'danushsenthil779@gmail.com'  # Replace with your Gmail address
+EMAIL_HOST_PASSWORD = 'ftvh xnmx tppz bfsn'  # Replace with your Gmail App Password
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

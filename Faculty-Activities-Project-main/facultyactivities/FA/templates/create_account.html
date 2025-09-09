@@ -100,14 +100,17 @@
 </head>
 
 <body>
+   
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="signup-box">
                     <h2>Create Account</h2>
-                    <form action="#" method="POST">
+                    {% if error_message %}<div class="alert alert-danger" role="alert">{{ error_message }}</div>{% endif %}
+                    <form action="signup" method="POST">
+                        {%csrf_token%}
                         <div class="form-group">
-                            <input type="email" name="email" placeholder="Email" required>
+                            <input type="text" name="username" placeholder="Username" required>
                         </div>
                         <div class="form-group">
                             <input type="password" name="password" placeholder="Password" required>
@@ -115,7 +118,7 @@
                         <button type="submit" class="btn-signup">Sign Up</button>
                     </form>
                     <div class="login-link">
-                        Already have an account? <a href="#">Login</a>
+                        Already have an account? <a href="/fac_login">Login</a>
                     </div>
                 </div>
             </div>

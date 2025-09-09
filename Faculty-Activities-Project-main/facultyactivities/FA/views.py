@@ -2,13 +2,17 @@ import base64
 from django.db import connection
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
-from .models import AdminLogin,FacultyLogin,SDP_attended,Invited_talks
+from .models import AdminLogin,FacultyLogin,SDP_attended,Invited_talks, SDP_organised
 from datetime import datetime
 from calendar import month_name
 from django.db.models import Q 
 from functools import reduce
 from itertools import groupby
 from operator import itemgetter
+from django.shortcuts import get_object_or_404
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 # Create your views here.
 def home(request):
@@ -43,6 +47,20 @@ def fac_login(request):
         else:
             return render(request, 'fac_login.html', {'error_message': 'Invalid username or password.'})
     return render(request,'fac_login.html')
+
+def signup(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        if username and password:
+            try:
+                # Create faculty account (simple flow)
+                FacultyLogin.objects.create(username=username, password=password)
+                return render(request, 'fac_login.html', {'success_message': 'Account created. Please login.'})
+            except Exception as e:
+                return render(request, 'create_account.html', {'error_message': 'Could not create account. Try a different username.'})
+        return render(request, 'create_account.html', {'error_message': 'Username and password are required.'})
+    return render(request, 'create_account.html')
 
 def admin_dashboard(request):
     if request.method == 'POST':
@@ -188,7 +206,7 @@ def detail_enter(request):
         return render(request, 'table_enter.html', {'sdp_attended': sdp_attended})
     else:
         return render(request, 'enter_details.html')
-    
+
 def it_detail_enter(request):
     if request.method == 'POST':
         faculty = request.POST.get('faculty')
@@ -382,3 +400,132 @@ def it_handle_filters(request):
             grouped_data[year] = list(group)
 
         return render(request, 'it_table_sort.html', {'grouped_data': grouped_data})
+
+
+
+
+from django.core.mail import send_mail
+from django.conf import settings
+from django.shortcuts import get_object_or_404, redirect
+
+# ------------------------------
+# SDP Attended
+# ------------------------------
+def approve_sdp_attended(request, pk):
+    sdp = get_object_or_404(SDP_attended, pk=pk)
+    faculty_email = request.POST.get('faculty_email')
+
+    sdp.status = "approved"
+    sdp.save()
+
+    if faculty_email:
+        send_mail(
+            subject="SDP Attended Approved",
+            message=f"Your SDP attended '{sdp.name_of_event}' has been approved by the admin.",
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[faculty_email],
+            fail_silently=False,
+        )
+
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+def reject_sdp_attended(request, pk):
+    sdp = get_object_or_404(SDP_attended, pk=pk)
+    faculty_email = request.POST.get('faculty_email')
+
+    sdp.status = "rejected"
+    sdp.save()
+
+    if faculty_email:
+        send_mail(
+            subject="SDP Attended Rejected",
+            message=f"Your SDP attended '{sdp.name_of_event}' has been rejected by the admin.",
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[faculty_email],
+            fail_silently=False,
+        )
+
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+# ------------------------------
+# SDP Organised
+# ------------------------------
+def approve_sdp_organised(request, pk):
+    sdp = get_object_or_404(SDP_organised, pk=pk)
+    faculty_email = request.POST.get('faculty_email')
+
+    sdp.status = "approved"
+    sdp.save()
+
+    if faculty_email:
+        send_mail(
+            subject="SDP Organised Approved",
+            message=f"Your organised SDP '{sdp.name_of_event}' has been approved by the admin.",
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[faculty_email],
+            fail_silently=False,
+        )
+
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+def reject_sdp_organised(request, pk):
+    sdp = get_object_or_404(SDP_organised, pk=pk)
+    faculty_email = request.POST.get('faculty_email')
+
+    sdp.status = "rejected"
+    sdp.save()
+
+    if faculty_email:
+        send_mail(
+            subject="SDP Organised Rejected",
+            message=f"Your organised SDP '{sdp.name_of_event}' has been rejected by the admin.",
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[faculty_email],
+            fail_silently=False,
+        )
+
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+# ------------------------------
+# Invited Talks
+# ------------------------------
+def approve_invited_talk(request, pk):
+    talk = get_object_or_404(Invited_talks, pk=pk)
+    faculty_email = request.POST.get('faculty_email')
+
+    talk.status = "approved"
+    talk.save()
+
+    if faculty_email:
+        send_mail(
+            subject="Invited Talk Approved",
+            message=f"Your invited talk '{talk.name_of_event}' has been approved by the admin.",
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[faculty_email],
+            fail_silently=False,
+        )
+
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+def reject_invited_talk(request, pk):
+    talk = get_object_or_404(Invited_talks, pk=pk)
+    faculty_email = request.POST.get('faculty_email')
+
+    talk.status = "rejected"
+    talk.save()
+
+    if faculty_email:
+        send_mail(
+            subject="Invited Talk Rejected",
+            message=f"Your invited talk '{talk.name_of_event}' has been rejected by the admin.",
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[faculty_email],
+            fail_silently=False,
+        )
+
+    return redirect(request.META.get('HTTP_REFERER', '/'))

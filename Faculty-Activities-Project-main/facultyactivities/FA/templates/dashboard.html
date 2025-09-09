@@ -186,11 +186,18 @@
 </head>
 
 <body>
+    
 
-    <div class="container">
-        <h1>Welcome Back</h1>
-        <p>Select the category you want to retrieve</p>
-
+    <div class="container" style="position: relative;">
+        <!-- Back Arrow inside form -->
+        <a href="{% url 'home' %}" 
+   style="position: absolute; top: 20px; left: 20px; border: none; background: none; font-size: 24px; color: var(--primary-color); cursor: pointer;">
+   <i class="fas fa-arrow-left"></i>
+</a>
+    
+        <h1 style="text-align: center;">Welcome Back</h1>
+        <p style="text-align: center;">Select the category you want to retrieve</p>
+    
         <form action="details" method="POST">
             {%csrf_token%}
             <div class="form-group">
@@ -234,6 +241,7 @@
                 Submit</button>
         </form>
     </div>
+    
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script>
