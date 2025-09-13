@@ -25,14 +25,16 @@ Recognizing the need for an efficient, user-friendly, and technology-driven solu
 ## ⚙️ Installation & Setup
 1. Setup Process:
    ```bash
-   git clone https://github.com/your-username/fams.git
-   cd fams
+   git clone https://github.com/Danushsenthilkumar/StaffSync
+   cd cd Faculty-Activities-Project-main\Faculty-Activities-Project-main
 
    python -m venv venv
    source venv/bin/activate   # for Linux/Mac
    venv\Scripts\activate      # for Windows
 
    pip install -r requirements.txt
+
+   cd Faculty-Activities-Project-main\Faculty-Activities-Project-main\facultyactivities
 
    python manage.py migrate
 
