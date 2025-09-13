@@ -23,19 +23,19 @@ Recognizing the need for an efficient, user-friendly, and technology-driven solu
 ---
 
 ## ⚙️ Installation & Setup
-1. Clone the repository:
+1. Setup Process:
    ```bash
    git clone https://github.com/your-username/fams.git
    cd fams
 
-2.python -m venv venv
-source venv/bin/activate   # for Linux/Mac
-venv\Scripts\activate      # for Windows
+   python -m venv venv
+   source venv/bin/activate   # for Linux/Mac
+   venv\Scripts\activate      # for Windows
 
-3.pip install -r requirements.txt
+   pip install -r requirements.txt
 
-4.python manage.py migrate
+   python manage.py migrate
 
-5.python manage.py runserver
+   python manage.py runserver
 
 
